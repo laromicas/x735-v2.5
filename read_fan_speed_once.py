@@ -30,13 +30,8 @@ def fell(n):
 GPIO.add_event_detect(TACH, GPIO.FALLING, fell)
 
 try:
-    while True:
-        # rpm = 0
-        time.sleep(1)
-        print("\r%.f RPM   " % rpm, end='')
-
-
+    time.sleep(0.1)
+    print("%.f" % rpm)
 except KeyboardInterrupt:
     GPIO.cleanup()
-    print('')
 
