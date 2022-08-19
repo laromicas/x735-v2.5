@@ -69,19 +69,15 @@ echo "X735 Shutting down..."
 echo "0" > /sys/class/gpio/gpio$BUTTON/value
 ' > /usr/local/bin/x735softsd.sh
 sudo chmod +x /usr/local/bin/x735softsd.sh
-sudo systemctl enable pigpiod
 
 CUR_DIR=$(pwd)
-#sudo echo "alias x735off='sudo x735softsd.sh'" >> /home/pi/.bashrc
-#sudo echo "python ${CUR_DIR}/pwm_fan_control.py&"  >> ${USER_RUN_FILE}
-sudo sed -i "$ i python ${CUR_DIR}/pwm_fan_control.py&" /etc/rc.local
+sudo sed -i "$ i python3 ${CUR_DIR}/x735fan.py&" /etc/rc.local
 
-sudo pigpiod
-python ${CUR_DIR}/pwm_fan_control.py &
+python ${CUR_DIR}/x735fan.py &
 
 echo "The installation is complete."
 echo "Please run 'sudo reboot' to reboot the device."
 echo "NOTE:"
 echo "1. DON'T modify the name fold: $(basename ${CUR_DIR}), or the PWM fan will not work after reboot."
-echo "2. pwm_fan_control.py is python file to control fan speed according temperature of CPU, you can modify it according your needs."
+echo "2. x735fan.py is python file to control fan speed according temperature of CPU, you can modify it according your needs."
 echo "3. PWM fan needs a PWM signal to start working. If fan doesn't work in third-party OS afer reboot only remove the YELLOW and BLUE wire of x735 fan to let the fan run immediately or contact us: info@geekworm.com."

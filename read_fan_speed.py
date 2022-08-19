@@ -1,5 +1,5 @@
-#!/usr/bin/python3
-# this python code is base python 2, not python 3
+#!/usr/bin/python
+# this python code is base python 3, not python 2
 # -*- coding: utf-8 -*-
 import RPi.GPIO as GPIO
 import time
